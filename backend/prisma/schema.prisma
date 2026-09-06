@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  userId    Int        @id @default(autoincrement())
+  userName  String?
+  email     String     @unique
+  password  String
+  role      Role       @default(OPERATOR)
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  visitors  Visitors[]
+}
+
+enum Role {
+  ADMIN
+  OPERATOR
+}
+
+model Departments {
+  departmentId   Int         @id @default(autoincrement())
+  departmentName String      @unique
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  isActive       Boolean     @default(true)
+  projects       Projects[]
+  employees      Employees[]
+  visitors       Visitors[]
+}
+
+model Projects {
+  projectId    Int         @id @default(autoincrement())
+  projectName  String      @unique
+  department   Departments @relation(fields: [departmentId], references: [departmentId])
+  departmentId Int
+  isActive     Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  visitors     Visitors[]
+}
+
+model Employees {
+  employeeId   Int         @id @default(autoincrement())
+  employeeName String
+  department   Departments @relation(fields: [departmentId], references: [departmentId])
+  departmentId Int
+  isActive     Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  visitors     Visitors[]
+}
+
+model Visitors {
+  visitorId              Int         @id @default(autoincrement())
+  visitorName            String
+  phone                  String
+  email                  String
+  address                String
+  company                String
+  photoUrl               String
+  visitingReason         String
+  additionalMembersCount Int
+  additionalMembersNames String?
+  vehicleNumber          String
+  vehicleType            String
+  departmentId           Int
+  employeeId             Int
+  projectId              Int
+  createdBy              String
+  department             Departments @relation(fields: [departmentId], references: [departmentId])
+  employee               Employees   @relation(fields: [employeeId], references: [employeeId])
+  project                Projects    @relation(fields: [projectId], references: [projectId])
+  createdByOperator      Users       @relation(fields: [createdBy], references: [email])
+  createdAt              DateTime    @default(now())
+  updatedAt              DateTime    @updatedAt
+}
+
+
+model LookupVehicleTypes {
+  vehicleTypeId Int      @id @default(autoincrement())
+  vehicleType   String   @unique 
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model LookupMemberCounts {
+  memberCountId Int      @id @default(autoincrement())
+  memberCount   String   @unique 
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
