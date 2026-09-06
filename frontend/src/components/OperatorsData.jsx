@@ -45,7 +45,7 @@ export function OperatorsData() {
 
   // Fetch operators list on mount
   useEffect(() => {
-    axios.get('http://localhost:3000/api/admin/operators', { withCredentials: true })
+    axios.get('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/operators', { withCredentials: true })
       .then((response) => {
         const rawData = Array.isArray(response.data) ? response.data : response.data.operators;
         setOperators(sortOperators(rawData || []));
@@ -58,7 +58,7 @@ export function OperatorsData() {
     e.preventDefault();
     if (!emailInput.trim() || !passwordInput.trim()) return;
 
-    axios.post('http://localhost:3000/api/admin/operators', 
+    axios.post('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/operators', 
       { 
         userName: userNameInput,
         email: emailInput,
@@ -87,8 +87,8 @@ export function OperatorsData() {
     const newStatus = !operator.isActive;
 
     const endpoint = operator.isActive 
-      ? `http://localhost:3000/api/admin/operators/${id}/deactivate`
-      : `http://localhost:3000/api/admin/operators/${id}/activate`;
+      ? `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/operators/${id}/deactivate`
+      : `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/operators/${id}/activate`;
 
     axios.patch(endpoint, {}, { withCredentials: true })
       .then(() => {

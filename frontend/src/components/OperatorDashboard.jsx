@@ -47,7 +47,7 @@ export function OperatorDashboard({ className, user, setUser }) {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:3000/api/auth/logout",
+        "https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/auth/logout",
         {},
         { withCredentials: true }
       );
@@ -71,11 +71,11 @@ export function OperatorDashboard({ className, user, setUser }) {
         });
 
       const [deptRes, projRes, empRes, vehRes, memRes] = await Promise.all([
-        getReq("http://localhost:3000/api/visitors/departments"),
-        getReq("http://localhost:3000/api/visitors/projects"),
-        getReq("http://localhost:3000/api/visitors/employees"),
-        getReq("http://localhost:3000/api/visitors/vehicle-types"),
-        getReq("http://localhost:3000/api/visitors/member-counts"),
+        getReq("https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/visitors/departments"),
+        getReq("https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/visitors/projects"),
+        getReq("https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/visitors/employees"),
+        getReq("https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/visitors/vehicle-types"),
+        getReq("https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/visitors/member-counts"),
       ]);
 
       setDepartments(deptRes.data.departments || []);
@@ -156,7 +156,7 @@ export function OperatorDashboard({ className, user, setUser }) {
 
       // 2. Submit Visitor Record
       const response = await axios.post(
-        "http://localhost:3000/api/visitors",
+        "https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/visitors",
         {
           ...formData,
           photoUrl,

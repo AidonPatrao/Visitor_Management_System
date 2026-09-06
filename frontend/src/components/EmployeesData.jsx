@@ -47,7 +47,7 @@ export function EmployeesData({ selectedDepartmentId }) {
 
   // Fetch departments list for the modal dropdown
   useEffect(() => {
-    axios.get('http://localhost:3000/api/admin/departments', { withCredentials: true })
+    axios.get('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/departments', { withCredentials: true })
       .then((response) => {
         const rawDepts = Array.isArray(response.data) ? response.data : response.data.departments;
         setDepartments(rawDepts || []);
@@ -58,8 +58,8 @@ export function EmployeesData({ selectedDepartmentId }) {
   // Fetch employees list
   useEffect(() => {
     const url = selectedDepartmentId 
-      ? `http://localhost:3000/api/admin/employees?departmentId=${selectedDepartmentId}`
-      : 'http://localhost:3000/api/admin/employees';
+      ? `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/employees?departmentId=${selectedDepartmentId}`
+      : 'https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/employees';
 
     axios.get(url, { withCredentials: true })
       .then((response) => {
@@ -74,7 +74,7 @@ export function EmployeesData({ selectedDepartmentId }) {
     e.preventDefault();
     if (!employeeNameInput.trim() || !selectedDeptForModal) return;
 
-    axios.post('http://localhost:3000/api/admin/employees', 
+    axios.post('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/employees', 
       { 
         employeeName: employeeNameInput,
         departmentId: Number(selectedDeptForModal)
@@ -107,7 +107,7 @@ export function EmployeesData({ selectedDepartmentId }) {
 
     const id = getEmpId(editingEmployee);
 
-    axios.patch(`http://localhost:3000/api/admin/employees/${id}`, 
+    axios.patch(`https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/employees/${id}`, 
       { 
         employeeName: employeeNameInput,
         departmentId: selectedDeptForModal ? Number(selectedDeptForModal) : undefined
@@ -136,8 +136,8 @@ export function EmployeesData({ selectedDepartmentId }) {
     const newStatus = !employee.isActive;
 
     const endpoint = employee.isActive 
-      ? `http://localhost:3000/api/admin/employees/${id}/deactivate`
-      : `http://localhost:3000/api/admin/employees/${id}/activate`;
+      ? `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/employees/${id}/deactivate`
+      : `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/employees/${id}/activate`;
 
     axios.patch(endpoint, {}, { withCredentials: true })
     .then(() => {

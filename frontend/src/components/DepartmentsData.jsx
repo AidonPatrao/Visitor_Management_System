@@ -44,7 +44,7 @@ export function DepartmentsData() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/admin/departments', { withCredentials: true })
+    axios.get('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/departments', { withCredentials: true })
       .then((response) => {
         const rawData = Array.isArray(response.data) ? response.data : response.data.departments;
         setDepartments(sortDepartments(rawData));
@@ -57,7 +57,7 @@ export function DepartmentsData() {
     e.preventDefault();
     if (!departmentNameInput.trim()) return;
 
-    axios.post('http://localhost:3000/api/admin/departments', 
+    axios.post('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/departments', 
       { departmentName: departmentNameInput },
       { withCredentials: true }
     )
@@ -85,7 +85,7 @@ export function DepartmentsData() {
 
     const id = getDeptId(editingDepartment);
 
-    axios.patch(`http://localhost:3000/api/admin/departments/${id}`, 
+    axios.patch(`https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/departments/${id}`, 
       { departmentName: departmentNameInput },
       { withCredentials: true }
     )
@@ -111,8 +111,8 @@ export function DepartmentsData() {
     const newStatus = !department.isActive;
 
     const endpoint = department.isActive 
-      ? `http://localhost:3000/api/admin/departments/${id}/deactivate`
-      : `http://localhost:3000/api/admin/departments/${id}/activate`;
+      ? `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/departments/${id}/deactivate`
+      : `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/departments/${id}/activate`;
 
     axios.patch(endpoint, {}, { withCredentials: true })
     .then(() => {

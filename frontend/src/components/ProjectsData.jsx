@@ -47,7 +47,7 @@ export function ProjectsData({ selectedDepartmentId }) {
 
   // Fetch departments list for the modal dropdown
   useEffect(() => {
-    axios.get('http://localhost:3000/api/admin/departments', { withCredentials: true })
+    axios.get('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/departments', { withCredentials: true })
       .then((response) => {
         const rawDepts = Array.isArray(response.data) ? response.data : response.data.departments;
         setDepartments(rawDepts || []);
@@ -58,8 +58,8 @@ export function ProjectsData({ selectedDepartmentId }) {
   // Fetch projects list
   useEffect(() => {
     const url = selectedDepartmentId 
-      ? `http://localhost:3000/api/admin/projects?departmentId=${selectedDepartmentId}`
-      : 'http://localhost:3000/api/admin/projects';
+      ? `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/projects?departmentId=${selectedDepartmentId}`
+      : 'https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/projects';
 
     axios.get(url, { withCredentials: true })
       .then((response) => {
@@ -74,7 +74,7 @@ export function ProjectsData({ selectedDepartmentId }) {
     e.preventDefault();
     if (!projectNameInput.trim() || !selectedDeptForModal) return;
 
-    axios.post('http://localhost:3000/api/admin/projects', 
+    axios.post('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/projects', 
       { 
         projectName: projectNameInput,
         departmentId: Number(selectedDeptForModal)
@@ -107,7 +107,7 @@ export function ProjectsData({ selectedDepartmentId }) {
 
     const id = getProjectId(editingProject);
 
-    axios.patch(`http://localhost:3000/api/admin/projects/${id}`, 
+    axios.patch(`https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/projects/${id}`, 
       { 
         projectName: projectNameInput,
         departmentId: selectedDeptForModal ? Number(selectedDeptForModal) : undefined
@@ -136,8 +136,8 @@ export function ProjectsData({ selectedDepartmentId }) {
     const newStatus = !project.isActive;
 
     const endpoint = project.isActive 
-      ? `http://localhost:3000/api/admin/projects/${id}/deactivate`
-      : `http://localhost:3000/api/admin/projects/${id}/activate`;
+      ? `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/projects/${id}/deactivate`
+      : `https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/projects/${id}/activate`;
 
     axios.patch(endpoint, {}, { withCredentials: true })
     .then(() => {

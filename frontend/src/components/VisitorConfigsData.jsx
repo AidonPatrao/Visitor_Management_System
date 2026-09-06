@@ -20,7 +20,7 @@ export function VisitorConfigsData() {
 
   // Fetch initial combined configurations
   const fetchConfigs = () => {
-    axios.get('http://localhost:3000/api/admin/visitorConfigs', { withCredentials: true })
+    axios.get('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/visitorConfigs', { withCredentials: true })
       .then((res) => {
         setVehicleTypes(res.data.vehicleTypes || []);
         setMemberCounts(res.data.memberCounts || []);
@@ -37,7 +37,7 @@ export function VisitorConfigsData() {
     e.preventDefault();
     if (!newVehicleType.trim()) return;
 
-    axios.post('http://localhost:3000/api/admin/visitorConfigs/vehicleTypes', 
+    axios.post('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/visitorConfigs/vehicleTypes', 
       { vehicleType: newVehicleType.trim() },
       { withCredentials: true }
     )
@@ -54,7 +54,7 @@ export function VisitorConfigsData() {
 
   // 2. DELETE VEHICLE TYPE
   const handleDeleteVehicleType = (id, label) => {
-    axios.delete(`http://localhost:3000/api/admin/visitorConfigs/vehicleTypes/${id}`, { withCredentials: true })
+    axios.delete(`https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/visitorConfigs/vehicleTypes/${id}`, { withCredentials: true })
       .then(() => {
         setVehicleTypes((prev) => prev.filter((item) => item.vehicleTypeId !== id));
         showToastNotification("Vehicle Type Removed", `"${label}" deleted.`);
@@ -70,7 +70,7 @@ export function VisitorConfigsData() {
     e.preventDefault();
     if (!newMemberCount.trim()) return;
 
-    axios.post('http://localhost:3000/api/admin/visitorConfigs/memberCounts', 
+    axios.post('https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/visitorConfigs/memberCounts', 
       { memberCount: newMemberCount.trim() },
       { withCredentials: true }
     )
@@ -87,7 +87,7 @@ export function VisitorConfigsData() {
 
   // 4. DELETE MEMBER COUNT OPTION
   const handleDeleteMemberCount = (id, label) => {
-    axios.delete(`http://localhost:3000/api/admin/visitorConfigs/memberCounts/${id}`, { withCredentials: true })
+    axios.delete(`https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/admin/visitorConfigs/memberCounts/${id}`, { withCredentials: true })
       .then(() => {
         setMemberCounts((prev) => prev.filter((item) => item.memberCountId !== id));
         showToastNotification("Option Removed", `"${label}" deleted.`);

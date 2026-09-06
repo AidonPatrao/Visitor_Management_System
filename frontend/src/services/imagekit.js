@@ -26,7 +26,7 @@ export const uploadVisitorPhoto = async (base64Photo) => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await axios.post("http://localhost:3000/api/upload/imagekit", formData, {
+    const response = await axios.post("https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/upload/imagekit", formData, {
       headers: { "Content-Type": "multipart/form-data" },
       withCredentials: true,
     });

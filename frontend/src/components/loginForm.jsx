@@ -38,8 +38,8 @@ export function LoginForm({
     }
 
     const endpoint = submit === "ADMIN" 
-      ? "http://localhost:3000/api/auth/admin" 
-      : "http://localhost:3000/api/auth/operator";
+      ? "https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/auth/admin" 
+      : "https://visitor-management-system-git-main-aidonpatraos-projects.vercel.app/api/auth/operator";
 
     try {
       const response = await axios.post(
